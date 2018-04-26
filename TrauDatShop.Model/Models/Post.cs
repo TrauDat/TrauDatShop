@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using TeduShop.Model.Abstract;
+using TrauDatShop.Model.Abstract;
 
-namespace TeduShop.Model.Models
+namespace TrauDatShop.Model.Models
 {
     [Table("Posts")]
     public class Post : Auditable
