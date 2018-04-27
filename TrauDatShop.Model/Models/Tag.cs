@@ -8,6 +8,7 @@ namespace TrauDatShop.Model.Models
     {
         [Key]
         [MaxLength(50)]
+        [Column(TypeName = "varchar")]
         public string ID { set; get; }
 
         [MaxLength(50)]
