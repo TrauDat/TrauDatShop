@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -8,7 +9,7 @@ using TrauDatShop.Model.Models;
 
 namespace TrauDatShop.Data
 {
-    public class TrauDatShopDbContext : DbContext
+    public class TrauDatShopDbContext : IdentityDbContext<ApplicationUser>
     {
         public TrauDatShopDbContext() : base("TrauDatShopConnection")
         {
@@ -35,9 +36,16 @@ namespace TrauDatShop.Data
 
         public DbSet<VisitorStatistic> VisitorStatistics { set; get; }
         public DbSet<Error> Errors { set; get; }
+
+        public static TrauDatShopDbContext Create()
+        {
+            return new TrauDatShopDbContext();
+        }
+
         protected override void OnModelCreating(DbModelBuilder builder)
         {
-           
+            builder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId });
+            builder.Entity<IdentityUserLogin>().HasKey(i => i.UserId);
         }
     }
 }
