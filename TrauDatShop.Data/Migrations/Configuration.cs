@@ -1,9 +1,10 @@
-namespace TrauDatShop.Data.Migrations
+﻿namespace TrauDatShop.Data.Migrations
 {
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Model.Models;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -17,33 +18,51 @@ namespace TrauDatShop.Data.Migrations
 
         protected override void Seed(TrauDatShop.Data.TrauDatShopDbContext context)
         {
+            CreateProductCategorySample(context);
             //  This method will be called after migrating to the latest version.
 
-            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new TrauDatShopDbContext()));
+            //var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new TrauDatShopDbContext()));
 
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new TrauDatShopDbContext()));
+            //var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new TrauDatShopDbContext()));
 
-            var user = new ApplicationUser()
+            //var user = new ApplicationUser()
+            //{
+            //    UserName = "TrauDat",
+            //    Email = "traudat2212@gmail.com",
+            //    EmailConfirmed = true,
+            //    BirthDay = DateTime.Now,
+            //    FullName = "Technology Education"
+
+            //};
+
+            //manager.Create(user, "123654$");
+
+            //if (!roleManager.Roles.Any())
+            //{
+            //    roleManager.Create(new IdentityRole { Name = "Admin" });
+            //    roleManager.Create(new IdentityRole { Name = "User" });
+            //}
+
+            //var adminUser = manager.FindByEmail("traudat2212@gmail.com");
+
+            //manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
+
+        }
+
+        private void CreateProductCategorySample(TrauDatShop.Data.TrauDatShopDbContext context)
+        {
+            if (context.ProductCategories.Count() == 0) {
+                List<ProductCategory> listProductCategory = new List<ProductCategory>()
             {
-                UserName = "TrauDat",
-                Email = "traudat2212@gmail.com",
-                EmailConfirmed = true,
-                BirthDay = DateTime.Now,
-                FullName = "Technology Education"
-
+                new ProductCategory() { Name = "Điện lạnh", Alias="dien-lanh", Status=true },
+                new ProductCategory() { Name = "Viễn thông", Alias="vien-thong", Status=true },
+                new ProductCategory() { Name = "Đồ gia dụng", Alias="do-gia-dung", Status=true },
+                new ProductCategory() { Name = "Mỹ phẩm", Alias="my-pham", Status=true },
             };
-
-            manager.Create(user, "123654$");
-
-            if (!roleManager.Roles.Any())
-            {
-                roleManager.Create(new IdentityRole { Name = "Admin" });
-                roleManager.Create(new IdentityRole { Name = "User" });
+                context.ProductCategories.AddRange(listProductCategory);
+                context.SaveChanges();
             }
-
-            var adminUser = manager.FindByEmail("traudat2212@gmail.com");
-
-            manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
+            
 
         }
     }

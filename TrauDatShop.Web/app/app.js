@@ -1,7 +1,10 @@
 ﻿/// <reference path="/Assets/admin/libs/angular/angular.js" />
 
 (function () {
-    angular.module('traudatshop', ['traudatshop.products', 'traudatshop.common']).config(config);
+    angular.module('traudatshop',
+        ['traudatshop.products',
+            'traudatshop.product_categories',
+          'traudatshop.common']).config(config);
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function config($stateProvider, $urlRouterProvider) {
