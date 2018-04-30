@@ -229,7 +229,7 @@
                             <span class="pull-right-container">
                                 <span class="label label-primary pull-right">4</span>
                             </span>
-                        </a>
+                        </a>    
                         <ul class="treeview-menu">
                             <li><a ui-sref="product_categories"><i class="fa fa-circle-o"></i> Danh mục sản phẩm</a></li>
                             <li><a ui-sref="products"><i class="fa fa-circle-o"></i> Sản phẩm</a></li>
@@ -580,15 +580,11 @@
     <script src="~/Assets/admin/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     @*<script src="~/Assets/admin/js/demo.js"></script>*@
-    <script>
-  $(document).ready(function () {
-    $('.sidebar-menu').tree()
-  })
-    </script>
     <!-- Begin embed angularJS -->
     <script src="~/Assets/admin/libs/angular/angular.js"></script>
     <script src="~/Assets/admin/libs/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="~/app/shared/modules/traudatshop.common.js"></script>
+    <script src="~/app/shared/filters/statusFilter.js"></script>
     <script src="~/app/shared/services/apiService.js"></script>
     <script src="~/app/components/products/products.module.js"></script>
     <script src="~/app/components/product_categories/productCategories.module.js"></script>
@@ -600,3 +596,4 @@
     <script src="~/app/components/home/homeController.js"></script>
 </body>
 </html>
+
