@@ -8,8 +8,8 @@ using System.Web.Http;
 using TrauDatShop.Model.Models;
 using TrauDatShop.Service;
 using TrauDatShop.Web.Infrastructure.Core;
-using TrauDatShop.Web.Models;
 using TrauDatShop.Web.Infrastructure.Extensions;
+using TrauDatShop.Web.Models;
 
 namespace TrauDatShop.Web.Api
 {
@@ -17,6 +17,7 @@ namespace TrauDatShop.Web.Api
     public class ProductCategoryController : ApiControllerBase
     {
         #region Initialize
+
         private IProductCategoryService _productCategoryService;
 
         public ProductCategoryController(IErrorService errorService, IProductCategoryService productCategoryService)
@@ -24,7 +25,9 @@ namespace TrauDatShop.Web.Api
         {
             this._productCategoryService = productCategoryService;
         }
-        #endregion
+
+        #endregion Initialize
+
         [Route("getallparents")]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
@@ -66,7 +69,6 @@ namespace TrauDatShop.Web.Api
             });
         }
 
-
         [Route("create")]
         [HttpPost]
         [AllowAnonymous]
@@ -103,12 +105,13 @@ namespace TrauDatShop.Web.Api
             {
                 var model = _productCategoryService.GetById(id);
 
-                var responseData = Mapper.Map<ProductCategory,ProductCategoryViewModel>(model);
+                var responseData = Mapper.Map<ProductCategory, ProductCategoryViewModel>(model);
 
                 var response = request.CreateResponse(HttpStatusCode.OK, responseData);
                 return response;
             });
         }
+
         [Route("update")]
         [HttpPut]
         [AllowAnonymous]
@@ -136,5 +139,31 @@ namespace TrauDatShop.Web.Api
                 return response;
             });
         }
+
+        [Route("delete")]
+        [HttpDelete]
+        [AllowAnonymous]
+        public HttpResponseMessage Delete(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    var oldProductCategory = _productCategoryService.Delete(id);
+                    _productCategoryService.Save();
+
+                    var responseData = Mapper.Map<ProductCategory, ProductCategoryViewModel>(oldProductCategory);
+                    response = request.CreateResponse(HttpStatusCode.Created, responseData);
+                }
+
+                return response;
+            });
+        }
+        
     }
 }
