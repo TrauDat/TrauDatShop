@@ -1,3 +1,3 @@
 ﻿(function () {
-    angular.module('traudatshop.common', ['ui.router', 'ngBootbox'])
+    angular.module('traudatshop.common', ['ui.router', 'ngBootbox', 'ngCkeditor'])
 })();
