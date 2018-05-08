@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web;
-using System.Web.Mvc;
+using System.Web.Http;
 using System.Web.Script.Serialization;
 using TrauDatShop.Model.Models;
 using TrauDatShop.Service;
@@ -19,7 +18,6 @@ namespace TrauDatShop.Web.Api
     public class ProductController : ApiControllerBase
     {
         #region Initialize
-
         private IProductService _productService;
 
         public ProductController(IErrorService errorService, IProductService productService)
@@ -28,7 +26,7 @@ namespace TrauDatShop.Web.Api
             this._productService = productService;
         }
 
-        #endregion Initialize
+        #endregion
 
         [Route("getallparents")]
         [HttpGet]
@@ -41,6 +39,21 @@ namespace TrauDatShop.Web.Api
                 var responseData = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(model);
 
                 var response = request.CreateResponse(HttpStatusCode.OK, responseData);
+                return response;
+            });
+        }
+        [Route("getbyid/{id:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetById(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                var model = _productService.GetById(id);
+
+                var responseData = Mapper.Map<Product, ProductViewModel>(model);
+
+                var response = request.CreateResponse(HttpStatusCode.OK, responseData);
+
                 return response;
             });
         }
@@ -71,10 +84,11 @@ namespace TrauDatShop.Web.Api
             });
         }
 
+
         [Route("create")]
         [HttpPost]
         [AllowAnonymous]
-        public HttpResponseMessage Create(HttpRequestMessage request, ProductViewModel productVm)
+        public HttpResponseMessage Create(HttpRequestMessage request, ProductViewModel productCategoryVm)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -86,7 +100,7 @@ namespace TrauDatShop.Web.Api
                 else
                 {
                     var newProduct = new Product();
-                    newProduct.UpdateProduct(productVm);
+                    newProduct.UpdateProduct(productCategoryVm);
                     newProduct.CreatedDate = DateTime.Now;
                     _productService.Add(newProduct);
                     _productService.Save();
@@ -95,21 +109,6 @@ namespace TrauDatShop.Web.Api
                     response = request.CreateResponse(HttpStatusCode.Created, responseData);
                 }
 
-                return response;
-            });
-        }
-
-        [Route("getbyid/{id:int}")]
-        [HttpGet]
-        public HttpResponseMessage GetAllByID(HttpRequestMessage request, int id)
-        {
-            return CreateHttpResponse(request, () =>
-            {
-                var model = _productService.GetById(id);
-
-                var responseData = Mapper.Map<Product, ProductViewModel>(model);
-
-                var response = request.CreateResponse(HttpStatusCode.OK, responseData);
                 return response;
             });
         }
@@ -129,8 +128,10 @@ namespace TrauDatShop.Web.Api
                 else
                 {
                     var dbProduct = _productService.GetById(productVm.ID);
+
                     dbProduct.UpdateProduct(productVm);
                     dbProduct.UpdatedDate = DateTime.Now;
+
                     _productService.Update(dbProduct);
                     _productService.Save();
 
@@ -156,17 +157,16 @@ namespace TrauDatShop.Web.Api
                 }
                 else
                 {
-                    var oldProduct = _productService.Delete(id);
+                    var oldProductCategory = _productService.Delete(id);
                     _productService.Save();
 
-                    var responseData = Mapper.Map<Product, ProductViewModel>(oldProduct);
+                    var responseData = Mapper.Map<Product, ProductViewModel>(oldProductCategory);
                     response = request.CreateResponse(HttpStatusCode.Created, responseData);
                 }
 
                 return response;
             });
         }
-
         [Route("deletemulti")]
         [HttpDelete]
         [AllowAnonymous]
@@ -181,14 +181,15 @@ namespace TrauDatShop.Web.Api
                 }
                 else
                 {
-                    var listProduct = new JavaScriptSerializer().Deserialize<List<int>>(checkedProducts);
-                    foreach (var item in listProduct)
+                    var listProductCategory = new JavaScriptSerializer().Deserialize<List<int>>(checkedProducts);
+                    foreach (var item in listProductCategory)
                     {
                         _productService.Delete(item);
                     }
+
                     _productService.Save();
 
-                    response = request.CreateResponse(HttpStatusCode.OK, listProduct.Count);
+                    response = request.CreateResponse(HttpStatusCode.OK, listProductCategory.Count);
                 }
 
                 return response;
