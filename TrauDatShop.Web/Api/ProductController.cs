@@ -15,7 +15,6 @@ using TrauDatShop.Web.Models;
 namespace TrauDatShop.Web.Api
 {
     [RoutePrefix("api/product")]
-    [Authorize]
     public class ProductController : ApiControllerBase
     {
         #region Initialize
