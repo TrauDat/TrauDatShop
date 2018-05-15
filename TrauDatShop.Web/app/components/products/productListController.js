@@ -26,7 +26,7 @@
                 }
             }
             apiService.del('/api/product/deletemulti', config, function (result) {
-                notificationService.displaySuccess('Xóa thành công' + result.data + ' bản ghi.');
+                notificationService.displaySuccess('Xóa thành công ' + result.data + ' bản ghi.');
                 search();
             }, function (error) {
                 notificationService.displayError('Xóa không thành công');

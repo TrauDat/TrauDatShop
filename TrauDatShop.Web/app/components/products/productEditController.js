@@ -11,6 +11,7 @@
             height: '200px'
         }
         $scope.UpdateProduct = UpdateProduct;
+        $scope.moreImages = []; 
         $scope.GetSeoTitle = GetSeoTitle;
 
         function GetSeoTitle() {
@@ -44,11 +45,13 @@
         $scope.ChooseImage = function () {
             var finder = new CKFinder();
             finder.selectActionFunction = function (fileUrl) {
-                $scope.product.Image = fileUrl;
+                $scope.$apply(function () {
+                    $scope.product.Image = fileUrl;
+                })      
             }
             finder.popup();
         }
-        $scope.moreImages = [];
+       
         $scope.ChooseMoreImage = function () {
             var finder = new CKFinder();
             finder.selectActionFunction = function (fileUrl) {

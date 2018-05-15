@@ -92,6 +92,14 @@
     <Compile Include="Migrations\201805140626463_AddContentToSlide.Designer.cs">
       <DependentUpon>201805140626463_AddContentToSlide.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805150443530_AddMoreQuantity.cs" />
+    <Compile Include="Migrations\201805150443530_AddMoreQuantity.Designer.cs">
+      <DependentUpon>201805150443530_AddMoreQuantity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805151255110_addforeignkey.cs" />
+    <Compile Include="Migrations\201805151255110_addforeignkey.Designer.cs">
+      <DependentUpon>201805151255110_addforeignkey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ErrorRepository.cs" />
@@ -149,6 +157,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805140626463_AddContentToSlide.resx">
       <DependentUpon>201805140626463_AddContentToSlide.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805150443530_AddMoreQuantity.resx">
+      <DependentUpon>201805150443530_AddMoreQuantity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805151255110_addforeignkey.resx">
+      <DependentUpon>201805151255110_addforeignkey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

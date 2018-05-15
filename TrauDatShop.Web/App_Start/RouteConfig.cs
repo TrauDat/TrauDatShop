@@ -34,11 +34,16 @@ namespace TrauDatShop.Web
             );
             routes.MapRoute(
                 name: "Product",
-                url: "{alias}.p-{id}.html",
-                defaults: new { controller = "Product", action = "Detail", id = UrlParameter.Optional },
+                url: "{alias}.p-{productId}.html",
+                defaults: new { controller = "Product", action = "Detail", productId = UrlParameter.Optional },
                 namespaces: new string[] { "TrauDatShop.Web.Controllers" }
             );
-
+            routes.MapRoute(
+                name: "TagList",
+                url: "tag/{tagId}.html",
+                defaults: new { controller = "Product", action = "ListByTag", tagId = UrlParameter.Optional },
+                namespaces: new string[] { "TrauDatShop.Web.Controllers" }
+            );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

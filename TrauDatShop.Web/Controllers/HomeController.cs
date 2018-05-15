@@ -29,8 +29,8 @@ namespace TrauDatShop.Web.Controllers
             var homeViewModel = new HomeViewModel();
             homeViewModel.Slides = slideView;
 
-            var lastedProductModel = _productService.GetLastest(3);
-            var topSaleProductModel = _productService.GetHotProduct(3);
+            var lastedProductModel = _productService.GetLastest(6);
+            var topSaleProductModel = _productService.GetHotProduct(6);
             var lastedProductViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(lastedProductModel);
             var topSaleProductViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(topSaleProductModel);
             homeViewModel.LastestProducts = lastedProductViewModel;
