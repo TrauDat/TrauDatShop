@@ -8,6 +8,8 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.Data.Entity.Validation;
+    using System.Diagnostics;
     using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<TrauDatShop.Data.TrauDatShopDbContext>
@@ -23,7 +25,9 @@
             CreateSlide(context);
             //  This method will be called after migrating to the latest version.
             CreatePage(context);
-            
+            CreateContactDetail(context);
+
+
 
         }
         private void CreateUser(TrauDatShopDbContext context)
@@ -107,6 +111,7 @@
         {
             if(context.Pages.Count() == 0)
             {
+                try { 
                 var page = new Page()
                 {
                     Name = "Giới thiệu",
@@ -119,6 +124,53 @@
                 };
                 context.Pages.Add(page);
                 context.SaveChanges();
+                }
+                catch(DbEntityValidationException ex) {
+                    foreach (var eve in ex.EntityValidationErrors)
+                    {
+                        Trace.WriteLine($"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation error.");
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            Trace.WriteLine($"- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"");
+                        }
+                    }
+
+                }
+            }
+        }
+        private void CreateContactDetail(TrauDatShopDbContext context)
+        {
+            if (context.ContactDetails.Count() == 0)
+            {
+                try
+                {
+                    var contactDetail = new TrauDatShop.Model.Models.ContactDetail()
+                    {
+                        Name = "Trâu Đất Shop",
+                        Address = "Số 86B khóm 1 phường 8 TP Cà Mau",
+                        Email =  "traudat2212@gmail.com",
+                        Lat = 9.1737778,
+                        Lng = 105.142239,
+                        Phone = "01679995384",
+                        Website = "http://traudatshop.com",
+                        Other = "",
+                        Status = true
+                    };
+                    context.ContactDetails.Add(contactDetail);
+                    context.SaveChanges();
+                }
+                catch(DbEntityValidationException ex)
+                {
+                    foreach (var eve in ex.EntityValidationErrors)
+                    {
+                        Trace.WriteLine($"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation error.");
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            Trace.WriteLine($"- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"");
+                        }
+                    }
+
+                }
             }
         }
 
