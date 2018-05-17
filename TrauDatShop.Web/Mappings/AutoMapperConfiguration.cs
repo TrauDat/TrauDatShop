@@ -20,6 +20,8 @@ namespace TrauDatShop.Web.Mappings
                 cfg.CreateMap<ProductTag, ProductTagViewModel>().MaxDepth(2);
                 cfg.CreateMap<Footer, FooterViewModel>().MaxDepth(2);
                 cfg.CreateMap<Slide, SlideViewModel>().MaxDepth(2);
+                cfg.CreateMap<Page, PageViewModel>().MaxDepth(2);
+
 
 
 
