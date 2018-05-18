@@ -8,6 +8,8 @@ namespace TrauDatShop.Web
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            //BotDetect requests must not be routed
+            routes.IgnoreRoute("{*botdetect}", new { botdetect = @"(.*)BotDetectCaptcha\.ashx" });
             routes.MapRoute(
                name: "Contact",
                url: "lien-he.html",
@@ -26,6 +28,12 @@ namespace TrauDatShop.Web
                 defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional },
                 namespaces: new string[] { "TrauDatShop.Web.Controllers" }
             );
+            routes.MapRoute(
+              name: "Register",
+              url: "dang-ky.html",
+              defaults: new { controller = "Account", action = "Register", id = UrlParameter.Optional },
+              namespaces: new string[] { "TrauDatShop.Web.Controllers" }
+          );
             routes.MapRoute(
                 name: "Page",
                 url: "trang/{alias}.html",
