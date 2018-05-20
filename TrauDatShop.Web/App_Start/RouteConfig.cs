@@ -33,7 +33,13 @@ namespace TrauDatShop.Web
               url: "dang-ky.html",
               defaults: new { controller = "Account", action = "Register", id = UrlParameter.Optional },
               namespaces: new string[] { "TrauDatShop.Web.Controllers" }
-          );
+            );
+            routes.MapRoute(
+              name: "Cart",
+              url: "gio-hang.html",
+              defaults: new { controller = "ShoppingCart", action = "Index", id = UrlParameter.Optional },
+              namespaces: new string[] { "TrauDatShop.Web.Controllers" }
+            );
             routes.MapRoute(
                 name: "Page",
                 url: "trang/{alias}.html",
