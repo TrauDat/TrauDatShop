@@ -32,7 +32,23 @@
               .append("<div>" + item.label + "</div>")
               .appendTo(ul);
         };
-
+        $('.btnAddToCart').off('click').on('click', function (e) {
+            e.preventDefault();
+            var productId = parseInt($(this).data('id'));
+            $.ajax({
+                url: '/ShoppingCart/Add',
+                data: {
+                    productId: productId
+                },
+                type: 'POST',
+                dataType: 'json',
+                success: function (respone) {
+                    if (respone.status) {
+                        alert('Thêm sản phẩm thành công.');
+                    }
+                }
+            });
+        });
         $('#btnLogout').off('click').on('click', function (e) {
             e.preventDefault();
             $('#frmLogout').submit();

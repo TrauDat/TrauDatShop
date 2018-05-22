@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -6,6 +7,8 @@ using System.Web.Script.Serialization;
 using TrauDatShop.Common;
 using TrauDatShop.Model.Models;
 using TrauDatShop.Service;
+using TrauDatShop.Web.App_Start;
+using TrauDatShop.Web.Infrastructure.Extensions;
 using TrauDatShop.Web.Models;
 
 namespace TrauDatShop.Web.Controllers
@@ -13,18 +16,79 @@ namespace TrauDatShop.Web.Controllers
     public class ShoppingCartController : Controller
     {
         private IProductService _productService;
+        IOrderService _orderService;
+        private ApplicationUserManager _userManager;
 
-        public ShoppingCartController(IProductService productService)
+        public ShoppingCartController(IOrderService orderService, IProductService productService, ApplicationUserManager userManager)
         {
             this._productService = productService;
+            this._userManager = userManager;
+            this._orderService = orderService;
+
         }
 
         // GET: ShoppingCart
         public ActionResult Index()
         {
-            if(Session[CommonConstants.SessionCart] == null)
-            Session[CommonConstants.SessionCart] = new List<ShoppingCartViewModel>();
+            if (Session[CommonConstants.SessionCart] == null)
+                Session[CommonConstants.SessionCart] = new List<ShoppingCartViewModel>();
             return View();
+        }
+
+        public ActionResult CheckOut()
+        {
+            if (Session[CommonConstants.SessionCart] == null)
+            {
+                return Redirect("/gio-hang.html");
+            }
+            return View();
+        }
+
+        public JsonResult GetUser()
+        {
+            if(Request.IsAuthenticated)
+            {
+                var userId = User.Identity.GetUserId();
+                var user = _userManager.FindById(userId);
+                return Json(new
+                {
+                    data = user,
+                    status = true
+                });
+            }
+            return Json(new
+            {
+                status = false
+            });
+
+        }
+        public JsonResult CreateOrder(string orderViewModel)
+        {
+            var order = new JavaScriptSerializer().Deserialize<OrderViewModel>(orderViewModel);
+            var orderNew = new Order();
+            orderNew.UpdateOrder(order);
+            if(Request.IsAuthenticated)
+            {
+                orderNew.CustomerId = User.Identity.GetUserId();
+                orderNew.CreatedBy = User.Identity.GetUserName();
+            }
+            var cart = (List<ShoppingCartViewModel>)Session[CommonConstants.SessionCart];
+            List<OrderDetail> orderDetails = new List<OrderDetail>();
+            foreach (var item in cart)
+            {
+                var detail = new OrderDetail();
+                detail.ProductID = item.ProductId;
+                detail.Quantitty = item.Quantity;
+                orderDetails.Add(detail);
+            }
+          
+            _orderService.Create(orderNew, orderDetails);
+
+            return Json(new
+            {
+                status = true
+            });
+
         }
         public JsonResult GetAll()
         {
@@ -35,13 +99,14 @@ namespace TrauDatShop.Web.Controllers
             {
                 data = cart,
                 status = true
-            },JsonRequestBehavior.AllowGet);
+            }, JsonRequestBehavior.AllowGet);
         }
+
         [HttpPost]
         public JsonResult Add(int productId)
         {
             var cart = (List<ShoppingCartViewModel>)Session[CommonConstants.SessionCart];
-            if(cart == null)
+            if (cart == null)
             {
                 cart = new List<ShoppingCartViewModel>();
             }
@@ -63,19 +128,20 @@ namespace TrauDatShop.Web.Controllers
                 newItem.Product = Mapper.Map<Product, ProductViewModel>(product);
                 newItem.Quantity = 1;
                 cart.Add(newItem);
-            } 
+            }
 
             Session[CommonConstants.SessionCart] = cart;
-            return Json(new {
+            return Json(new
+            {
                 status = true
-
             });
         }
+
         [HttpPost]
         public JsonResult DeleteItem(int productId)
         {
             var cartSession = (List<ShoppingCartViewModel>)Session[CommonConstants.SessionCart];
-            if(cartSession != null)
+            if (cartSession != null)
             {
                 cartSession.RemoveAll(x => x.ProductId == productId);
                 Session[CommonConstants.SessionCart] = cartSession;
@@ -89,6 +155,7 @@ namespace TrauDatShop.Web.Controllers
                 status = false
             });
         }
+
         [HttpPost]
         public JsonResult Update(string cartData)
         {
@@ -97,9 +164,9 @@ namespace TrauDatShop.Web.Controllers
             var cartSession = (List<ShoppingCartViewModel>)Session[CommonConstants.SessionCart];
             foreach (var item in cartSession)
             {
-                foreach(var jitem in cartViewModel)
+                foreach (var jitem in cartViewModel)
                 {
-                    if(item.ProductId == jitem.ProductId)
+                    if (item.ProductId == jitem.ProductId)
                     {
                         item.Quantity = jitem.Quantity;
                     }
@@ -112,6 +179,7 @@ namespace TrauDatShop.Web.Controllers
                 status = true
             });
         }
+
         [HttpPost]
         public JsonResult DeleteAll()
         {
