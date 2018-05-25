@@ -22,6 +22,9 @@ namespace TrauDatShop.Web.Mappings
                 cfg.CreateMap<Slide, SlideViewModel>().MaxDepth(2);
                 cfg.CreateMap<Page, PageViewModel>().MaxDepth(2);
                 cfg.CreateMap<ContactDetail, ContactDetailViewModel>().MaxDepth(2);
+                cfg.CreateMap<ApplicationGroup, ApplicationGroupViewModel>().MaxDepth(2);
+                cfg.CreateMap<ApplicationRole, ApplicationRoleViewModel>().MaxDepth(2);
+                cfg.CreateMap<ApplicationUser, ApplicationUserViewModel>().MaxDepth(2);
 
 
 

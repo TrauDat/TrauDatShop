@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TrauDatShop.Common.ViewModels;
 using TrauDatShop.Data.Infrastructure;
 using TrauDatShop.Data.Repositories;
 using TrauDatShop.Model.Models;
@@ -38,7 +39,6 @@ namespace TrauDatShop.Service
                     _orderDetailRepository.Add(orderDetail);
 
                 }
-                _unitOfWork.Commit();
                 return true;
             }
             catch (Exception ex)
@@ -46,5 +46,7 @@ namespace TrauDatShop.Service
                 throw;
             }
         }
+
+     
     }
 }

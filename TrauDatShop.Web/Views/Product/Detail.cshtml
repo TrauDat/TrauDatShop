@@ -63,7 +63,8 @@
                 </li>
                 @{
                     var moreImages = (List<string>)ViewBag.MoreImages;
-                    if (moreImages.Count > 0)
+                
+                    if (moreImages != null)
                     {
                         foreach (var image in moreImages)
                         {
@@ -72,7 +73,7 @@
                                 <img class="etalage_source_image img-responsive" src="@image" title="" />
                             </li>
                         }
-                    }
+                     }
                 }
 
 

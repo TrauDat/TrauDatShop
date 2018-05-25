@@ -3,7 +3,11 @@
 (function () {
     angular.module('traudatshop',
         ['traudatshop.products',
+         'traudatshop.application_groups',
          'traudatshop.product_categories',
+         'traudatshop.application_roles',
+         'traudatshop.application_users',
+         'traudatshop.statistics', 
          'traudatshop.common'])
         .config(config)
         .config(configAuthentication);
@@ -34,11 +38,9 @@
         $httpProvider.interceptors.push(function ($q, $location) {
             return {
                 request: function (config) {
-
                     return config;
                 },
                 requestError: function (rejection) {
-
                     return $q.reject(rejection);
                 },
                 response: function (response) {
@@ -49,7 +51,6 @@
                     return response;
                 },
                 responseError: function (rejection) {
-
                     if (rejection.status == "401") {
                         $location.path('/login');
                     }

@@ -46,6 +46,9 @@
                     if (respone.status) {
                         alert('Thêm sản phẩm thành công.');
                     }
+                    else {
+                        alert(respone.message);
+                    }
                 }
             });
         });
