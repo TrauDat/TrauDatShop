@@ -16,7 +16,7 @@ body a{
 	-moz-transition: 0.5s all;
 }
 .top-header{
-	background: #F97E76;
+	background: #42ccc5;
 	padding: 0.7em 0;
 }
 .top-header-left{
@@ -164,7 +164,7 @@ h3.cate {
 	color: #fff;
 	font-size: 1.7em;
 	padding: 0.6em ;
-	background: #000;
+	background: #42ccc5;
 	margin: 0;
 }
 /*----*/

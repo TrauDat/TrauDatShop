@@ -6581,6 +6581,7 @@
     <Content Include="Assets\admin\libs\toastr\toastr.js" />
     <Content Include="Assets\admin\libs\toastr\toastr.min.css" />
     <Content Include="Assets\admin\libs\toastr\toastr.min.js" />
+    <Content Include="Assets\client\images\my_logo.png" />
     <Content Include="Assets\client\js\controllers\shoppingCart.js" />
     <Content Include="Assets\client\template\contact_template.html" />
     <Content Include="Assets\client\css\bootstrap.css" />
