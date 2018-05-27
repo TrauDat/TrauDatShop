@@ -6657,6 +6657,7 @@
     <Content Include="Assets\client\js\jquery.wmuSlider.js" />
     <Content Include="Assets\client\template\newuser.html" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Libs\CKFinder.dll" />
@@ -7212,6 +7213,11 @@
     <Content Include="Assets\admin\libs\chart.js\test\fixtures\plugin.filler\fill-line-dataset.json" />
     <Content Include="Assets\admin\libs\chart.js\test\fixtures\plugin.filler\fill-radar-boundary-origin-spline.json" />
     <Content Include="Assets\admin\libs\chart.js\test\fixtures\plugin.filler\fill-radar-boundary-origin.json" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Shared\Layouts.cshtml" />
