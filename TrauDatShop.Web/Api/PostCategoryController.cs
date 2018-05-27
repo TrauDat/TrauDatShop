@@ -12,6 +12,7 @@ using TrauDatShop.Web.Infrastructure.Extensions;
 namespace TrauDatShop.Web.Api
 {
     [RoutePrefix("api/postcategory")]
+    [Authorize]
     public class PostCategoryController : ApiControllerBase
     {
         IPostCategoryService _postCategoryService;

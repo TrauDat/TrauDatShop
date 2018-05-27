@@ -16,7 +16,7 @@ using TrauDatShop.Service;
 
 namespace TrauDatShop.Web.Api
 {
-    //[Authorize]
+    [Authorize]
     [RoutePrefix("api/applicationUser")]
     public class ApplicationUserController : ApiControllerBase
     {

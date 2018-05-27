@@ -9,7 +9,7 @@ using TrauDatShop.Web.Infrastructure.Core;
 
 namespace TrauDatShop.Web.Api
 {
-    //[Authorize]
+    [Authorize]
     [RoutePrefix("api/statistic")]
     public class StatisticController : ApiControllerBase
     {

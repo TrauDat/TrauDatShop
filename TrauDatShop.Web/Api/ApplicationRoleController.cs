@@ -16,6 +16,7 @@ using TrauDatShop.Web.Models;
 namespace TrauDatShop.Web.Api
 {
     [RoutePrefix("api/applicationRole")]
+    [Authorize]
     public class ApplicationRoleController : ApiControllerBase
     {
         private IApplicationRoleService _appRoleService;

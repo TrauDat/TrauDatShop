@@ -319,6 +319,7 @@
     <Content Include="app\shared\services\loginService.js" />
     <Content Include="app\shared\services\notificationService.js" />
     <Content Include="app\shared\views\baseView.html" />
+    <Content Include="app\shared\views\sideBar.html" />
     <Content Include="Assets\admin\css\AdminLTE.css" />
     <Content Include="Assets\admin\css\AdminLTE.min.css" />
     <Content Include="Assets\admin\css\alt\AdminLTE-bootstrap-social.css" />
@@ -391,6 +392,8 @@
     <Content Include="Assets\admin\img\user8-128x128.jpg" />
     <Content Include="Assets\admin\js\adminlte.js" />
     <Content Include="Assets\admin\js\adminlte.min.js" />
+    <Content Include="Assets\admin\js\app.js" />
+    <Content Include="Assets\admin\js\app.min.js" />
     <Content Include="Assets\admin\js\demo.js" />
     <Content Include="Assets\admin\js\pages\dashboard.js" />
     <Content Include="Assets\admin\js\pages\dashboard2.js" />

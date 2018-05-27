@@ -4975,3 +4975,6 @@ table.text-center th {
     white-space: normal !important;
   }
 }
+  .main-sidebar, .left-side {
+            min-height: 0%;
+        }

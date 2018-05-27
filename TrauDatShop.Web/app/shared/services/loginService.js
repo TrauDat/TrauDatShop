@@ -1,7 +1,7 @@
 ﻿(function (app) {
     'use strict';
-    app.service('loginService', ['$http', '$q', 'authenticationService', 'authData',
-    function ($http, $q, authenticationService, authData) {
+    app.service('loginService', ['$http', '$q', 'authenticationService', 'authData', 'apiService', 
+    function ($http, $q, authenticationService, authData, apiService) {
         var userInfo;
         var deferred;
 
@@ -29,9 +29,14 @@
         }
 
         this.logOut = function () {
-            authenticationService.removeToken();
-            authData.authenticationData.IsAuthenticated = false;
-            authData.authenticationData.userName = "";
+            apiService.post('/api/account/logout', null,function (respone) {
+                authenticationService.removeToken();
+                authData.authenticationData.IsAuthenticated = false;
+                authData.authenticationData.userName = "";
+                authData.authenticationData.accessToken = "";
+
+            },null);
+       
         }
     }]);
 })(angular.module('traudatshop.common'));

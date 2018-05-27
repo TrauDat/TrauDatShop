@@ -18,7 +18,9 @@ using TrauDatShop.Web.Models;
 
 namespace TrauDatShop.Web.Api
 {
+
     [RoutePrefix("api/applicationGroup")]
+    [Authorize]
     public class ApplicationGroupController : ApiControllerBase
     {
         private IApplicationGroupService _appGroupService;

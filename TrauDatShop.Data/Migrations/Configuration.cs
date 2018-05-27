@@ -27,7 +27,9 @@
             CreatePage(context);
             CreateContactDetail(context);
             CreateConfigTitle(context);
-
+            CreateFooter(context);
+            CreateUser(context);
+             
 
 
         }
@@ -63,31 +65,34 @@
         }
         private void CreateUser(TrauDatShopDbContext context)
         {
-            //var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new TrauDatShopDbContext()));
+            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new TrauDatShopDbContext()));
 
-            //var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new TrauDatShopDbContext()));
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new TrauDatShopDbContext()));
 
-            //var user = new ApplicationUser()
-            //{
-            //    UserName = "TrauDat",
-            //    Email = "traudat2212@gmail.com",
-            //    EmailConfirmed = true,
-            //    BirthDay = DateTime.Now,
-            //    FullName = "Technology Education"
+            var user = new ApplicationUser()
+            {
+                UserName = "TrauDat",
+                Email = "traudat2212@gmail.com",
+                EmailConfirmed = true,
+                BirthDay = DateTime.Now,
+                FullName = "Technology Education"
 
-            //};
+            };
+            if(manager.Users.Count(x => x.UserName=="TrauDat") == 0)
+            {
+                manager.Create(user, "123654$");
 
-            //manager.Create(user, "123654$");
+                if (!roleManager.Roles.Any())
+                {
+                    roleManager.Create(new IdentityRole { Name = "Admin" });
+                    roleManager.Create(new IdentityRole { Name = "User" });
+                }
 
-            //if (!roleManager.Roles.Any())
-            //{
-            //    roleManager.Create(new IdentityRole { Name = "Admin" });
-            //    roleManager.Create(new IdentityRole { Name = "User" });
-            //}
+                var adminUser = manager.FindByEmail("traudat2212@gmail.com");
 
-            //var adminUser = manager.FindByEmail("traudat2212@gmail.com");
-
-            //manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
+                manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
+            }
+           
         }
         private void CreateProductCategorySample(TrauDatShop.Data.TrauDatShopDbContext context)
         {
@@ -109,7 +114,13 @@
         {
             if (context.Footers.Count(x => x.ID == CommonConstants.DefaultFooterId) ==0)
             {
-                string content = "";
+                string content = "Footer";
+                context.Footers.Add(new Footer()
+                {
+                    ID = CommonConstants.DefaultFooterId,  
+                    Content = content
+                });
+                context.SaveChanges();
             }
         }
         private void CreateSlide(TrauDatShopDbContext context)
