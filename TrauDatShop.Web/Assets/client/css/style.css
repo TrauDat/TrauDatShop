@@ -433,7 +433,7 @@ h5.latest-product{
 }
 .grid-chain-bottom h6{
 	margin: 0;
-	font-size: 1.3em;
+	font-size: 1em;
 	color: #000;
 	font-weight: 700;
 	padding: 0.8em 0.5em 0;
@@ -457,11 +457,18 @@ h5.latest-product{
 	margin: 0;
 }
 .star-price {
-	padding: 1em 0.5em;
+	padding: 3em 0.5em;
 }
 .chain{
 	margin: 0 auto;
 	padding: 3em 0;
+}
+.chain-grid {
+    border: 1px solid #ddd;
+    position: relative;
+    width: 30.7%;
+    margin: 0 2% 0 0;
+    padding: 0;
 }
 .chain-grid span.star{
 	background: url(../images/img-sprite.png)-208px -14px;

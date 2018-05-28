@@ -85,7 +85,10 @@
 
             <h4>@Model.Name</h4>
             <div class="cart-b">
-                <div class="left-n ">@(Model.Price == 0 ? "Liên hệ" : Model.Price.ToString("N0"))</div>
+                @*<div class="left-n ">@(Model.Price == 0 ? "Liên hệ"  : Model.Price.ToString("N0"))</div>*@
+                <div class="left-n ">@if (Model.PromotionPrice == null) { @(Model.Price == 0 ? "Liên hệ" : Model.Price.ToString("N0")); } else { @(Model.Price == 0 ? "Liên hệ" : Model.PromotionPrice.ToString());
+                }</div>
+
                 <a class="now-get get-cart-in btnAddToCart" href="#" data-id="@Model.ID">Thêm vào giỏ hàng</a>
                 <div class="clearfix"></div>
             </div>
