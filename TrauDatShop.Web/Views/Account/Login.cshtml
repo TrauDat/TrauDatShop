@@ -24,8 +24,13 @@
             </div>
             
             <input type="submit" value="Đăng nhập">
+
         }
+        @Html.Partial("_ExternalLoginsListPartial", new TrauDatShop.Web.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+
     </div>
+
+
     <div class="login-left">
         <h3>Chưa có tài khoản?</h3>
         <p>Nếu bạn chưa có tài khoản vui lòng đăng ký tại link dưới đây:</p>

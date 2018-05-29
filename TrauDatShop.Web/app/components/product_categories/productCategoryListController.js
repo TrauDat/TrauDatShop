@@ -92,6 +92,7 @@
                     pageSize: 5
                 }
             }
+            $scope.loading = true;
             apiService.get('/api/productcategory/getall', config, function (result) {
                 if (result.data.TotalCount == 0) {
                     notificationService.displayWarning('Không có bản ghi nào được tìm thấy.');
@@ -104,8 +105,12 @@
                 $scope.page = result.data.Page;
                 $scope.pagesCount = result.data.TotalPages;
                 $scope.totalCount = result.data.TotalCount;
+                $scope.loading = false;
+
             }, function () {
                 console.log('Load productcategory failed.');
+                $scope.loading = false;
+
             });
         }
 

@@ -20,5 +20,8 @@ namespace TrauDatShop.Common
 
         public const string HomeMetaDescription = "HomeMetaDescription";
 
+        public const string Administrator = "Quản trị";
+
+
     }
 }

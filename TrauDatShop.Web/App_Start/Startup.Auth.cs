@@ -3,13 +3,18 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using System;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using TrauDatShop.Common;
 using TrauDatShop.Data;
 using TrauDatShop.Model.Models;
+using TrauDatShop.Service;
+using TrauDatShop.Web.Infrastructure.Core;
 
 [assembly: OwinStartup(typeof(TrauDatShop.Web.App_Start.Startup))]
 
@@ -49,7 +54,7 @@ namespace TrauDatShop.Web.App_Start
                     // This is a security feature which is used when you change a password or add an external login to your account.  
                     OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
                          validateInterval: TimeSpan.FromMinutes(30),
-                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
+                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager,DefaultAuthenticationTypes.ApplicationCookie))
                 }
             });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
@@ -63,15 +68,15 @@ namespace TrauDatShop.Web.App_Start
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "1724156397871880",
-            //   appSecret: "398039cc7588d52f87a7adcefecc3210");
+            app.UseFacebookAuthentication(
+               appId: "2074828846122466",
+               appSecret: "1dcd27a8484f497d23a011a91415c802");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "712161982861-4d9bdgfvf6pti1vviifjogopqdqlft56.apps.googleusercontent.com",
-            //    ClientSecret = "T0cgiSG6Gi7BKMr-fCCkdErO"
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "555455839772-aoatufhvghrca2iugmkv87otm2rktro3.apps.googleusercontent.com",
+                ClientSecret = "oJBcN9-P4Nfu7Q_SvzW_38Om"
+            });
         }
         public class AuthorizationServerProvider : OAuthAuthorizationServerProvider
         {
@@ -100,17 +105,30 @@ namespace TrauDatShop.Web.App_Start
                     context.Rejected();
                     return;
                 }
+             
                 if (user != null)
                 {
-                    ClaimsIdentity identity = await userManager.CreateIdentityAsync(
-                                                           user,
-                                                           DefaultAuthenticationTypes.ExternalBearer);
-                    context.Validated(identity);
+                    var applicationGroupService = ServiceFactory.Get<IApplicationGroupService>();
+                    var listGroup = applicationGroupService.GetListGroupByUserId(user.Id);
+                    if (listGroup.Any(x => x.Name == CommonConstants.Administrator))
+                    {
+                        ClaimsIdentity identity = await userManager.CreateIdentityAsync(
+                                                          user,
+                                                          DefaultAuthenticationTypes.ExternalBearer);
+                        context.Validated(identity);
+                        
+                    }
+                    else
+                    {
+                        context.Rejected();
+                        context.SetError("invalid_group", "Bạn không phải là quản trị");
+                    }
+                   
                 }
                 else
                 {
-                    context.SetError("invalid_grant", "Tài khoản hoặc mật khẩu không đúng.'");
-                    context.Rejected();
+                   context.SetError("invalid_grant", "Tài khoản hoặc mật khẩu không đúng.");
+                   //context.Rejected();
                 }
             }
         }
