@@ -21,6 +21,7 @@ namespace TrauDatShop.Web.Models
         public string Address { set; get; }
 
         [Required(ErrorMessage = "Bạn cần nhập số điện thoại.")]
+        [Phone(ErrorMessage = "SDT không hợp lệ.")]
         public string PhoneNumber { set; get; }
     }
 }

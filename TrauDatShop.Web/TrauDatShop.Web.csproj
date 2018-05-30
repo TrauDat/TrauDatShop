@@ -6624,36 +6624,12 @@
     <Content Include="Assets\client\images\gpluse.png" />
     <Content Include="Assets\client\images\img-sprite.png" />
     <Content Include="Assets\client\images\label_new.png" />
-    <Content Include="Assets\client\images\logo.png" />
     <Content Include="Assets\client\images\pi.jpg" />
-    <Content Include="Assets\client\images\pi1.jpg" />
-    <Content Include="Assets\client\images\pi2.jpg" />
-    <Content Include="Assets\client\images\pi3.jpg" />
-    <Content Include="Assets\client\images\pi4.jpg" />
-    <Content Include="Assets\client\images\pic.jpg" />
     <Content Include="Assets\client\images\pic1.jpg" />
     <Content Include="Assets\client\images\pic10.jpg" />
-    <Content Include="Assets\client\images\pic11.jpg" />
-    <Content Include="Assets\client\images\pic12.jpg" />
-    <Content Include="Assets\client\images\pic13.jpg" />
     <Content Include="Assets\client\images\pic2.jpg" />
-    <Content Include="Assets\client\images\pic3.jpg" />
-    <Content Include="Assets\client\images\pic4.jpg" />
-    <Content Include="Assets\client\images\pic5.jpg" />
-    <Content Include="Assets\client\images\pic6.jpg" />
-    <Content Include="Assets\client\images\pic7.jpg" />
-    <Content Include="Assets\client\images\pic8.jpg" />
     <Content Include="Assets\client\images\review.png" />
     <Content Include="Assets\client\images\rss.png" />
-    <Content Include="Assets\client\images\s1.jpg" />
-    <Content Include="Assets\client\images\s2.jpg" />
-    <Content Include="Assets\client\images\s3.jpg" />
-    <Content Include="Assets\client\images\s4.jpg" />
-    <Content Include="Assets\client\images\sh.jpg" />
-    <Content Include="Assets\client\images\si1.jpg" />
-    <Content Include="Assets\client\images\si2.jpg" />
-    <Content Include="Assets\client\images\si3.jpg" />
-    <Content Include="Assets\client\images\si4.jpg" />
     <Content Include="Assets\client\images\star.png" />
     <Content Include="Assets\client\images\tick1.png" />
     <Content Include="Assets\client\images\twitter.png" />
@@ -7249,6 +7225,7 @@
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <None Include="Properties\PublishProfiles\puclish.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TrauDatShop.Common\TrauDatShop.Common.csproj">
