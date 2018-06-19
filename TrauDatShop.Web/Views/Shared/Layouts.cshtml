@@ -12,10 +12,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <meta name="keywords" content="@ViewBag.MetaDescription" />
 
     @*<link href="~/Assets/client/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="~/Assets/client/font-awesome-4.6.3/css/font-awesome.css" rel="stylesheet" />
-    <link href="~/Assets/admin/libs/jquery-ui/themes/smoothness/jquery-ui.min.css" rel="stylesheet" />
-    <link href="~/Assets/client/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="~/Assets/client/css/custom.css" rel="stylesheet" />*@
+        <link href="~/Assets/client/font-awesome-4.6.3/css/font-awesome.css" rel="stylesheet" />
+        <link href="~/Assets/admin/libs/jquery-ui/themes/smoothness/jquery-ui.min.css" rel="stylesheet" />
+        <link href="~/Assets/client/css/style.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="~/Assets/client/css/custom.css" rel="stylesheet" />*@
     @Styles.Render("~/css/base")
     <!--//theme-style-->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -23,8 +23,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!--fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <!--//fonts-->
-   
-    
+
+
 </head>
 <body>
     <!--header-->
@@ -34,18 +34,42 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         @RenderBody()
         @{ Html.RenderAction("Category", "Home");}
     </div>
-
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/5b1d0a1d8859f57bdc7c007c/default';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+    <!--Start FB Like-->
+    <div id="fb-root"></div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.0&appId=2074828846122466&autoLogAppEvents=1';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+    <!--End FB Like-->
+    <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
     @{ Html.RenderAction("Footer", "Home");}
     <div class="clearfix"> </div>
     <!--Script-->
     @*<script src="~/Assets/client/js/jquery.min.js"></script>
-    <script src="~/Assets/admin/libs/jquery-ui/jquery-ui.min.js"></script>
-    <script src="~/Assets/admin/libs/mustache/mustache.js"></script>
-    <script src="~/Assets/admin/libs/numeral/numeral.js"></script>
-    <script src="~/Assets/admin/libs/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="~/Assets/admin/libs/jquery-ui/jquery-ui.min.js"></script>
+        <script src="~/Assets/admin/libs/mustache/mustache.js"></script>
+        <script src="~/Assets/admin/libs/numeral/numeral.js"></script>
+        <script src="~/Assets/admin/libs/jquery-validation/dist/jquery.validate.js"></script>
 
-    <script src="~/Assets/admin/libs/jquery-validation/dist/additional-methods.min.js"></script>
-    <script src="~/Assets/client/js/common.js"></script>*@
+        <script src="~/Assets/admin/libs/jquery-validation/dist/additional-methods.min.js"></script>
+        <script src="~/Assets/client/js/common.js"></script>*@
 
     <!--script-->
     @Scripts.Render("~/js/jquery")

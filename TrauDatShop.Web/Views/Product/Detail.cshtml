@@ -63,7 +63,7 @@
                 </li>
                 @{
                     var moreImages = (List<string>)ViewBag.MoreImages;
-                
+
                     if (moreImages != null)
                     {
                         foreach (var image in moreImages)
@@ -73,7 +73,7 @@
                                 <img class="etalage_source_image img-responsive" src="@image" title="" />
                             </li>
                         }
-                     }
+                    }
                 }
 
 
@@ -86,54 +86,77 @@
             <h4>@Model.Name</h4>
             <div class="cart-b">
                 @*<div class="left-n ">@(Model.Price == 0 ? "Liên hệ"  : Model.Price.ToString("N0"))</div>*@
-                <div class="left-n ">@if (Model.PromotionPrice == null) { @(Model.Price == 0 ? "Liên hệ" : Model.Price.ToString("N0")); } else { @(Model.Price == 0 ? "Liên hệ" : Model.PromotionPrice.ToString());
-                }</div>
-
-                <a class="now-get get-cart-in btnAddToCart" href="#" data-id="@Model.ID">Thêm vào giỏ hàng</a>
-                <div class="clearfix"></div>
+                <div class="left-n ">
+                    @if (Model.PromotionPrice == null)
+                { @(Model.Price == 0 ? "Liên hệ" : Model.Price.ToString("N0"));
+                }
+                else
+                { @(Model.Price == 0 ? "Liên hệ" : Model.PromotionPrice.ToString());
+                }
             </div>
-            <h6> Còn lại @Model.Quantity sản phẩm trong kho</h6>
-            <p>@Model.Description</p>
-            <div class="tag">
-                <h5>Tag :</h5>
-                <ul class="taglist">
-                    @foreach (var tag in (IEnumerable<TrauDatShop.Web.Models.TagViewModel>)ViewBag.Tags)
-                    {
-                        <li><a href="/tag/@(tag.ID).html">#@(tag.Name),</a></li>
-                    }
 
-                </ul>
-            </div>
+            <a class="now-get get-cart-in btnAddToCart" href="#" data-id="@Model.ID">Thêm vào giỏ hàng</a>
             <div class="clearfix"></div>
-            <div class="share">
-                <h5>Chia sẻ :</h5>
+        </div>
+        <h6> Còn lại @Model.Quantity sản phẩm trong kho</h6>
+        <p>@Model.Description</p>
+        <div class="tag">
+            <h5>Tag :</h5>
+            <ul class="taglist">
+                @foreach (var tag in (IEnumerable<TrauDatShop.Web.Models.TagViewModel>)ViewBag.Tags)
+                {
+                    <li><a href="/tag/@(tag.ID).html">#@(tag.Name),</a></li>
+                }
 
-                <ul class="share_nav">
-                    <li><a href="#"><img src="~/Assets/client/images/facebook.png" title="facebook"></a></li>
-                    <li><a href="#"><img src="~/Assets/client/images/twitter.png" title="Twiiter"></a></li>
-                    <li><a href="#"><img src="~/Assets/client/images/rss.png" title="Rss"></a></li>
-                    <li><a href="#"><img src="~/Assets/client/images/gpluse.png" title="Google+"></a></li>
-                </ul>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+        <div class="share">
+            <h5>Chia sẻ :</h5>
 
-            </div>
-
+            <ul class="share_nav">
+                <li><a href="#"><img src="~/Assets/client/images/facebook.png" title="facebook"></a></li>
+                <li><a href="#"><img src="~/Assets/client/images/twitter.png" title="Twiiter"></a></li>
+                <li><a href="#"><img src="~/Assets/client/images/rss.png" title="Rss"></a></li>
+                <li><a href="#"><img src="~/Assets/client/images/gpluse.png" title="Google+"></a></li>
+            </ul>
 
         </div>
-        <div class="clearfix"> </div>
+
+
     </div>
-    @{
-        var relatedProducts = (IEnumerable<TrauDatShop.Web.Models.ProductViewModel>)ViewBag.RelatedProducts;
+    <div class="clearfix"> </div>
+</div>
+@{
+    var relatedProducts = (IEnumerable<TrauDatShop.Web.Models.ProductViewModel>)ViewBag.RelatedProducts;
+}
+<h3 class="m_3">Sản phẩm liên quan</h3>
+<ul id="flexiselDemo1">
+    @foreach (var product in relatedProducts)
+    {
+        <li><img src="@product.Image" /><div class="grid-flex"><a href="/@(product.Alias).p-@(product.ID).html">@product.Name</a><p>@product.Price</p></div></li>
     }
-    <ul id="flexiselDemo1">
-        @foreach (var product in relatedProducts)
-        {
-            <li><img src="@product.Image" /><div class="grid-flex"><a href="/@(product.Alias).p-@(product.ID).html">@product.Name</a><p>@product.Price</p></div></li>
-        }
-    </ul>
+</ul>
 
 
-    <div class="toogle">
-        <h3 class="m_3">Chi tiết sản phẩm</h3>
-        <p class="m_text">@Html.Raw(Model.Content)</p>
-    </div>
+<div class="toogle">
+    <h3 class="m_3">Chi tiết sản phẩm</h3>
+    <p class="m_text">@Html.Raw(Model.Content)</p>
+</div>
+
+<!--Start comment FB-->
+<div id="fb-root"></div>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.0&appId=2074828846122466&autoLogAppEvents=1';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+<!--ENd comment FB-->
+<div class="toogle">
+    <h3 class="m_3">Bình luận</h3>
+    <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5"></div>
+</div>
 </div>

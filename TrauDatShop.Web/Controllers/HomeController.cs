@@ -68,7 +68,7 @@ namespace TrauDatShop.Web.Controllers
             return PartialView();
         }
         [ChildActionOnly]
-        [OutputCache(Duration = 3600)]
+        //[OutputCache(Duration = 3600)]
         public ActionResult Category()
         {
             var model = _productCategoryService.GetAll();

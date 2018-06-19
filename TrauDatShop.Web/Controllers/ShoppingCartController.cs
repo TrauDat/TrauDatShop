@@ -169,6 +169,7 @@ namespace TrauDatShop.Web.Controllers
             var cartSession = (List<ShoppingCartViewModel>)Session[CommonConstants.SessionCart];
             if (cartSession != null)
             {
+                
                 cartSession.RemoveAll(x => x.ProductId == productId);
                 Session[CommonConstants.SessionCart] = cartSession;
                 return Json(new
